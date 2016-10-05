@@ -1,25 +1,8 @@
 __author__ = 'uiandwe'
 import math
 
-def quick(array_list):
-    if len(array_list) <= 1:
-        return array_list
 
-    pivot = array_list[int(len(array_list)/2)]
-    less = []
-    more = []
-    equal = []
-    for val in array_list:
-        if pivot < val:
-            more.append(val)
-        elif pivot == val:
-            equal.append(val)
-        else:
-            less.append(val)
-    return quick(less)+quick(equal)+quick(more)
-
-
-def binary(array_list, search_value):
+def findNearNumber(array_list, search_value):
     print("find value : ", search_value)
     if array_list[0] > search_value:
         return array_list[0]
@@ -54,6 +37,6 @@ if __name__ == '__main__':
 
     temp_list = [random.randint(1, 1000) for i in range(1, 20)]
 
-    temp_list = quick(temp_list)
+    temp_list = sorted(temp_list)
     print(temp_list)
-    print(binary(temp_list, random.randint(1, 1000)))
+    print(findNearNumber(temp_list, random.randint(1, 1000)))
