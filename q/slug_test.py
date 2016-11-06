@@ -44,5 +44,4 @@ if __name__ == '__main__':
     temp_list = sorted(temp_list)
     find_value = random.randint(1, 1000)
     print(temp_list)
-    print([abs(i-find_value) for i in temp_list])
     print(findNearNumber(temp_list, find_value))
