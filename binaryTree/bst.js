@@ -50,7 +50,7 @@ class binarySearchTree extends tree{
             return node;
         }
 
-        if(node.key < key){
+        if(key < node.key){
             return this.search(node.getLeft(), key);
         }
         else{
@@ -66,7 +66,7 @@ class binarySearchTree extends tree{
             return new_node;
         }
 
-        if(node.key < key){
+        if(key < node.key){
             node.setLeft(this.insert(node.getLeft(), key));
             return node;
         }
@@ -80,7 +80,7 @@ class binarySearchTree extends tree{
         if(node.key == key){
             //no child
             if(node.getLeft() == null && node.getRight() == null){
-                if(parent.getLeft().key == key){
+                if(parent.getLeft() != null && parent.getLeft().key == key){
                     parent.setLeft(null);
                 }
                 else{
@@ -90,7 +90,38 @@ class binarySearchTree extends tree{
             }
             //two child
             else if(node.getLeft() != null && node.getRight() != null){
+                var new_child_node = node.getRight();
+                var parent_node = null;
+                while(true){
+                    if(new_child_node.getLeft() == null){
+                        break;
+                    }
+                    else{
+                        parent_node = new_child_node;
+                        new_child_node = new_child_node.getLeft();
+                    }
+                }
 
+                if(parent_node != null && new_child_node.getRight() != null){
+                    parent_node.setLeft(new_child_node.getRight());
+                }
+
+                new_child_node.setLeft(node.getLeft());
+                if(parent_node != null){
+                    new_child_node.setRight(node.getRight());
+                }
+
+                if(parent != null){
+                    if(parent.getLeft() != null && parent.getLeft().key == key){
+                        parent.setLeft(new_child_node);
+                    }
+                    else{
+                        parent.setRight(new_child_node);
+                    }
+                }
+
+
+                return node = null;
             }
             //one child
             else{
@@ -103,7 +134,7 @@ class binarySearchTree extends tree{
                     new_child_node = node.getRight();
                 }
 
-                if(parent.getLeft().key == key){
+                if(parent.getLeft() != null &&  parent.getLeft().key == key){
                     parent.setLeft(new_child_node);
                 }
                 else{
@@ -116,7 +147,7 @@ class binarySearchTree extends tree{
 
         }
 
-        if(node.key < key){
+        if(key < node.key){
             return this.delete(node.getLeft(), key, node);
         }
         else{
@@ -126,7 +157,7 @@ class binarySearchTree extends tree{
 }
 
 console.log("bst");
-var bst = new binarySearchTree(10);
+var bst = new binarySearchTree(20);
 console.log(bst);
 console.log("---------------------------------");
 console.log(bst.insert(bst, 11));
@@ -135,9 +166,18 @@ console.log(bst.insert(bst, 9));
 console.log("---------------------------------");
 console.log(bst.insert(bst, 12));
 console.log("---------------------------------");
+console.log(bst.insert(bst, 25));
+console.log("---------------------------------");
+console.log(bst.insert(bst, 22));
+console.log("---------------------------------");
+console.log(bst.insert(bst, 30));
+console.log(bst.insert(bst, 28));
+console.log(bst.insert(bst, 26));
+console.log(bst.insert(bst, 27));
+console.log("---------------------------------");
 
 
-
+console.log("---------------search-------------");
 console.log(bst.search(bst, 12));
 console.log("---------------------------------");
 console.log(bst.search(bst, 15));
@@ -145,8 +185,14 @@ console.log("---------------------------------");
 
 
 console.log("---------------delete-------------");
-console.log(bst.delete(bst, 11, null));
-console.log(bst);
 
 // console.log(bst.delete(bst, 12, null));
 // console.log(bst);
+
+// console.log(bst.delete(bst, 11, null));
+// console.log(bst);
+
+console.log(bst.delete(bst, 25, null));
+console.log(bst);
+
+
