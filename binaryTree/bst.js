@@ -51,10 +51,10 @@ class binarySearchTree extends tree{
         }
 
         if(node.key < key){
-            return search(node.getLeft(), key);
+            return this.search(node.getLeft(), key);
         }
         else{
-            return search(node.getRight(), key);
+            return this.search(node.getRight(), key);
         }
     }
 
@@ -75,13 +75,52 @@ class binarySearchTree extends tree{
             return node;
         }
     }
+
+    delete(node, key, parent){
+        if(node.key == key){
+            //no child
+            if(node.getLeft() == null && node.getRight() == null){
+                if(parent.getLeft().key == key){
+                    parent.setLeft(null);
+                }
+                else{
+                    parent.setRight(null);
+                }
+                return node = null;
+            }
+
+
+
+        }
+
+        if(node.key < key){
+            return this.delete(node.getLeft(), key, node);
+        }
+        else{
+            return this.delete(node.getRight(), key, node);
+        }
+    }
 }
 
 console.log("bst");
 var bst = new binarySearchTree(10);
 console.log(bst);
+console.log("---------------------------------");
 console.log(bst.insert(bst, 11));
+console.log("---------------------------------");
 console.log(bst.insert(bst, 9));
+console.log("---------------------------------");
 console.log(bst.insert(bst, 12));
+console.log("---------------------------------");
 
-console.log(bst.search(bst, 14));
+
+
+console.log(bst.search(bst, 12));
+console.log("---------------------------------");
+console.log(bst.search(bst, 15));
+console.log("---------------------------------");
+
+
+console.log("---------------delete-------------");
+console.log(bst.delete(bst, 12, null));
+console.log(bst);
