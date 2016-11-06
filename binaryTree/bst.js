@@ -86,7 +86,6 @@ class binarySearchTree extends tree{
                 else{
                     parent.setRight(null);
                 }
-                return node = null;
             }
             //two child
             else if(node.getLeft() != null && node.getRight() != null){
@@ -102,8 +101,13 @@ class binarySearchTree extends tree{
                     }
                 }
 
-                if(parent_node != null && new_child_node.getRight() != null){
-                    parent_node.setLeft(new_child_node.getRight());
+                if(parent_node != null){
+                    if(new_child_node.getRight() != null){
+                        parent_node.setLeft(new_child_node.getRight());
+                    }
+                    else{
+                        parent_node.setLeft(null);
+                    }
                 }
 
                 new_child_node.setLeft(node.getLeft());
@@ -119,9 +123,12 @@ class binarySearchTree extends tree{
                         parent.setRight(new_child_node);
                     }
                 }
+                else{
+                    node = new_child_node;
+                    return node;
+                }
 
 
-                return node = null;
             }
             //one child
             else{
@@ -141,10 +148,9 @@ class binarySearchTree extends tree{
                     parent.setRight(new_child_node);
                 }
 
-                return node = null;
             }
 
-
+            return node = null;
         }
 
         if(key < node.key){
@@ -192,7 +198,8 @@ console.log("---------------delete-------------");
 // console.log(bst.delete(bst, 11, null));
 // console.log(bst);
 
-console.log(bst.delete(bst, 25, null));
+console.log(bst = bst.delete(bst, 20, null));
+console.log("---------------------------------");
 console.log(bst);
 
 
