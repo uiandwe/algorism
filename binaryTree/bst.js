@@ -88,7 +88,30 @@ class binarySearchTree extends tree{
                 }
                 return node = null;
             }
+            //two child
+            else if(node.getLeft() != null && node.getRight() != null){
 
+            }
+            //one child
+            else{
+                var new_child_node = null;
+
+                if(node.getLeft() != null){
+                    new_child_node = node.getLeft();
+                }
+                else{
+                    new_child_node = node.getRight();
+                }
+
+                if(parent.getLeft().key == key){
+                    parent.setLeft(new_child_node);
+                }
+                else{
+                    parent.setRight(new_child_node);
+                }
+
+                return node = null;
+            }
 
 
         }
@@ -122,5 +145,8 @@ console.log("---------------------------------");
 
 
 console.log("---------------delete-------------");
-console.log(bst.delete(bst, 12, null));
+console.log(bst.delete(bst, 11, null));
 console.log(bst);
+
+// console.log(bst.delete(bst, 12, null));
+// console.log(bst);
